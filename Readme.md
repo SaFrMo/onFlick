@@ -1,38 +1,42 @@
 ### What
-jQuery plugin to fire an event on a trackpad flick. Trackpads can have inertial scrolling that fires false positives - for example, scrolling on a slideshow can trigger multiple events if the scroll takes a long time to come back down to 0.
+Fire an event on a trackpad or mousewheel flick. Scroll values on trackpads can have inertia and take a long time to come back down to 0 - this plugin smooths out those false positive scroll events. [Demo](http://codepen.io/SaFrMo/pen/BRWrbw?editors=1010)
 
 ### How
-Include jQuery first, then include jquery.onFlick.js.
+
+HTML:
 
 ```html
-<script src="path/to/jquery"></script>
 <script src="path/to/onFlick"></script>
 ```
 
-Then, pick your level of customization:
+JS:
 
-#### Default Options
+```js
+new OnFlick( callback, options );
+```
 
-`$('.selector').onFlick(function(e) { console.log('Scroll event: ' + e); });`
+Parameters:
+* `callback` - Function to run when flick event is triggered. Accepts the mousewheel event as an argument.
+* `options` - Optional object. Outlined below.
 
-Often called on `window` - for example:
-
-`$(window).onFlick( /* options... */ );`
-
-Also accepts any optional parameters (see below for details):
-
-`$('.selector').onFlick( callback, debounce, threshold );`
-
-#### In-Depth Options
+#### Options
 
 ```javascript
-$('.selector').onFlick({
-    callback: function(e) { console.log('onFlick event fired'); }, // Function to call when flick event is triggered. Accepts one variable containing the wheel event data.
-    debounce: 10, // How long, in ms, to wait after the callback is invoked before it can be invoked again
-    threshold: 'normal' // How fast the user needs to be scrolling in order to trigger the callback. Accepts 'high', 'normal' (default), and 'low' (all referring to the scroll speed necessary to trigger the event), as well as a number (referring to the average scroll delta that needs to be passed to trigger the event).
+{
+    debounce: 600, // How long, in ms, to wait after the callback is invoked before it can be invoked again
+    threshold: 10 // How fast the user needs to be scrolling in order to trigger the callback. Accepts a number referring to the average scroll delta necessary to trigger the event.
 });
 ```
 
+### How it works
+The plugin keeps a running tally of the last 10 scroll deltas. Each frame that the mousewheel event is called, it:
+* trims the oldest delta value if necessary
+* saves the latest delta value
+* averages them together
+* tests if the average is above the `threshold` defined in the options.
+
+This is more effective than a debounce function because debounce limits the frequency of a callback, not the conditions for triggering that callback. OnFlick combines the hard time limit of a debounce with an effort to make sure the user is actively moving on the page, not just running off of the inertia of an old trackpad event.
+
 =========
 
-Version 1.0
+Version 2.0
