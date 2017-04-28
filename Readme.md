@@ -1,10 +1,7 @@
-onFlick
-==========
-
-###What
+### What
 jQuery plugin to fire an event on a trackpad flick. Trackpads can have inertial scrolling that fires false positives - for example, scrolling on a slideshow can trigger multiple events if the scroll takes a long time to come back down to 0.
 
-###How
+### How
 Include jQuery first, then include jquery.onFlick.js.
 
 ```html
@@ -14,7 +11,7 @@ Include jQuery first, then include jquery.onFlick.js.
 
 Then, pick your level of customization:
 
-####Default Options
+#### Default Options
 
 `$('.selector').onFlick(function(e) { console.log('Scroll event: ' + e); });`
 
@@ -36,4 +33,6 @@ $('.selector').onFlick({
 });
 ```
 
-MIT license. Enjoy!
+=========
+
+Version 1.0
