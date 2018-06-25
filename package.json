@@ -3,9 +3,11 @@
     "version": "1.0.0",
     "description":
         "Fire an event on a trackpad or mousewheel flick. Scroll values on trackpads can have inertia and take a long time to come back down to 0 - this plugin smooths out those false positive scroll events. [Demo](http://codepen.io/SaFrMo/pen/BRWrbw?editors=1010)",
-    "main": "onFlick.js",
+    "main": "./dist/onFlick.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "babel src --out-dir dist",
+        "prepublish": "npm run build"
     },
     "repository": {
         "type": "git",
@@ -22,5 +24,12 @@
     "bugs": {
         "url": "https://github.com/SaFrMo/onFlick/issues"
     },
-    "homepage": "https://github.com/SaFrMo/onFlick#readme"
+    "homepage": "https://github.com/SaFrMo/onFlick#readme",
+    "dependencies": {
+        "babel-cli": "^6.26.0",
+        "babel-preset-env": "^1.7.0"
+    },
+    "babel": {
+        "presets": ["env"]
+    }
 }
