@@ -1,9 +1,9 @@
 {
-    "name": "onFlick",
+    "name": "on-flick",
     "version": "1.0.0",
     "description":
         "Fire an event on a trackpad or mousewheel flick. Scroll values on trackpads can have inertia and take a long time to come back down to 0 - this plugin smooths out those false positive scroll events. [Demo](http://codepen.io/SaFrMo/pen/BRWrbw?editors=1010)",
-    "main": "./dist/onFlick.js",
+    "main": "./dist/on-flick.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "build": "babel src --out-dir dist",
